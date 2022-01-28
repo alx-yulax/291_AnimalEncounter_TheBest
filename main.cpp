@@ -26,7 +26,7 @@ public:
     }
 
     virtual void meetVoice(Dog *animal) override {
-        std::cout << "Woof-Woof" << std::endl;
+        std::cout << "Woof Woof" << std::endl;
     }
 };
 
