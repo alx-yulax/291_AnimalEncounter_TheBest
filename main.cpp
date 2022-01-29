@@ -6,56 +6,53 @@ class Cat;
 
 class Animal {
 public:
-    virtual void meetVoice(Animal *animal) = 0;
+    virtual void meeting(Animal *) = 0;
 
-    virtual void meetVoice(Cat *animal) = 0;
+    virtual void meeting(Dog *) = 0;
 
-    virtual void meetVoice(Dog *animal) = 0;
-
-    static void meeting(Animal *, Animal *);
+    virtual void meeting(Cat *) = 0;
 };
 
 class Dog : public Animal {
-public:
-    virtual void meetVoice(Animal *animal) override {
-        animal->meetVoice(this);
+    void meeting(Animal *animal) override {
+        animal->meeting(this);
     }
 
-    virtual void meetVoice(Cat *animal) override {
+    void meeting(Dog *animal) override {
+        std::cout << "Woof-Woof" << std::endl;
+    }
+
+    void meeting(Cat *animal) override {
         std::cout << "Meow Bark" << std::endl;
-    }
-
-    virtual void meetVoice(Dog *animal) override {
-        std::cout << "Woof Woof" << std::endl;
     }
 };
 
 class Cat : public Animal {
-public:
-    virtual void meetVoice(Animal *animal) override {
-        animal->meetVoice(this);
+    void meeting(Animal *animal) override {
+        animal->meeting(this);
     }
 
-    virtual void meetVoice(Dog *animal) override {
+    void meeting(Dog *animal) override {
         std::cout << "Bark Meow" << std::endl;
     }
 
-    virtual void meetVoice(Cat *animal) override {
+    void meeting(Cat *animal) override {
         std::cout << "Purr Purr" << std::endl;
     }
 };
 
-void Animal::meeting(Animal *a, Animal *b) {
-    a->meetVoice(b);
+void meeting(Animal *a, Animal *b) {
+    a->meeting(b);
 }
 
-int main() {
-    Animal *a = new Dog();
-    Animal *b = new Cat();
-    Animal::meeting(a, a);
-    Animal::meeting(a, b);
-    Animal::meeting(b, a);
-    Animal::meeting(b, b);
 
+int main() {
+    Animal *a = new Dog;
+    Animal *b = new Cat;
+
+    meeting(a, a);
+    meeting(a, b);
+    meeting(b, a);
+    meeting(b, b);
     return 0;
 }
